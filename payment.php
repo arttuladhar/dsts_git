@@ -72,13 +72,14 @@ mail
 $type   = $_POST["mail"];
 $weight = $_POST["weight"];
 $bweight_letter = 20;
+$bweight_parcel = 30;
 
 //Cost Calculation Logic
 if ($type == "letter") {
-	$price = 20 + ceil( ($weight - $bweight_letter) / 20) * 5;
+	$price = $bweight_letter + ceil( ($weight - $bweight_letter) / 20) * 5;
 }
 else if ($type == "parcel"){
-	$price = 30 + ceil( ($weight - $bweight_parcel) / 100) * 15;
+	$price = $bweight_parcel + ceil( ($weight - $bweight_parcel) / 100) * 15;
 }
 
 
@@ -86,7 +87,6 @@ else if ($type == "parcel"){
 * Do Cost Calculation
 * Choose Payment
 */
-
 
 ?>
 
@@ -136,7 +136,7 @@ else if ($type == "parcel"){
 	</div>
 	<div class="row">
 	<div class="col-md-4">
-			<strong><h4 class="text-info">Price</h4></strong>
+			<strong><h4 class="text-info">Cost</h4></strong>
 			<table class="table table-condensed table-striped">
 				<tr><th>Package Type</th><td><?= $type ?></td></tr>
 				<tr><th>Weight (grams)</th><td><?= $weight ?></td></tr>
@@ -162,6 +162,11 @@ else if ($type == "parcel"){
 			</div>
 	</div>
 	</div>
+
+	<input type="hidden" name="mail" value="<?= $type ?>">
+	<input type="hidden" name="weight" value="<?= $weight ?>">
+	<input type="hidden" name="cost" value="<?= $price ?>">
+
 	</form>
 		<div class="row">
 		<div class="col-md-8">

@@ -1,10 +1,9 @@
 <html>
 <head>
-	<title>DSTS</title>
+	<title>DSTS - Send Shipment</title>
 	<!-- Bootstrap -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<script src="js/jquery.js"></script>
-
 </head>
 <?php
 
@@ -15,6 +14,7 @@ if (! isset($user_check)) {
 	header("Location: login.php");
 }
 
+//For New Session Delete Existing Session Cookies
 if ( $_GET['session']=="new" ) {
 	unset($_SESSION['rfname']);
 	unset($_SESSION['rlname']);
@@ -40,7 +40,6 @@ $result_userinfo = getUserInfo($dbconn, $user_check);
 $row=mysqli_fetch_array($result_userinfo,MYSQLI_BOTH);
 
 //Storing Sender Information to Session
-
 $_SESSION['sfname']     = $sfname    = $row['firstname'];
 $_SESSION['slname']     = $slname    = $row['lastname'];
 $_SESSION['semail']     = $semail    = $row['email'];

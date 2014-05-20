@@ -78,5 +78,38 @@ $SQL_SELECT_GETUSERINFO = "SELECT username, firstname, lastname, email, telephon
 	}
 }
 
+function getRowCount_Receiver($conn) {
+	$SQL_SELECT_GETRECEIVER_ROW = "SELECT COUNT(*) AS RECEIVER_INDEX FROM receiver";
+
+	if ( $conn !== null ) {
+		$result = mysqli_query($conn,$SQL_SELECT_GETRECEIVER_ROW);
+
+		if ($result !== false ){
+			$row=mysqli_fetch_array($result,MYSQLI_BOTH);
+			return $row['RECEIVER_INDEX'];
+			
+		} else {
+			die ('Error: '. mysqli_error($conn));	    	
+		}
+	}
+}
+
+function getRowCount_UserShipment($conn) {
+	$SQL_SELECT_GETRECEIVER_ROW = "SELECT COUNT(*) AS SHIPMENT_INDEX FROM user_shipment";
+
+	if ( $conn !== null ) {
+		$result = mysqli_query($conn,$SQL_SELECT_GETRECEIVER_ROW);
+
+		if ($result !== false ){
+			$row=mysqli_fetch_array($result,MYSQLI_BOTH);
+			return $row['SHIPMENT_INDEX'];
+			
+		} else {
+			die ('Error: '. mysqli_error($conn));	    	
+		}
+	}
+}
+
+
 
 ?>

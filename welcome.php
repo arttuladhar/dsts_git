@@ -16,8 +16,8 @@ if (! isset($user_check)) {
 <h1>Welcome </h1>
 <h2>User Functions</h2>
 <ul>
-	<li>Send Mail</li>
-	<li>Send Package</li>
+	<li><a href="send.php?session=new">Create Mail and Package</li>
+	<li>My Current Shipments</li>
 	<li>My Previous Shipments</li>
 </body>
 </html>
