@@ -34,10 +34,9 @@ $radd2  = isset($_SESSION['radd2'])?$_SESSION['radd2']:'';
 
 //Get UserInfo from Database
 include 'dbconnect.php';
-$dbconn = getdbConnection();
-$result_userinfo = getUserInfo($dbconn, $user_check);
 
-$row=mysqli_fetch_array($result_userinfo,MYSQLI_BOTH);
+$row    = getUserInfo($user_check);
+
 
 //Storing Sender Information to Session
 $_SESSION['sfname']     = $sfname    = $row['firstname'];

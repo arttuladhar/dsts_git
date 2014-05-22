@@ -60,13 +60,16 @@ function checkuserpassword($conn, $username, $password) {
 
 
 
-function getUserInfo($conn, $username) {
+function getUserInfo($username) {
+$conn = getdbConnection();
 
 /* check connection */
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
 }
+
+$username=mysqli_real_escape_string($conn,$username);
 
 $SQL_SELECT_GETUSERINFO = "SELECT username, firstname, lastname, email, telephone, street_address, 
 						  block_address, district, zone FROM user_info WHERE username='$username'";
@@ -75,12 +78,41 @@ $SQL_SELECT_GETUSERINFO = "SELECT username, firstname, lastname, email, telephon
 		$result = mysqli_query($conn,$SQL_SELECT_GETUSERINFO);
 
 		if ($result !== false ){
-			return $result;
+			$row=mysqli_fetch_array($result,MYSQLI_BOTH);
+			return $row;
 		} else {
-			die ('Error: '. mysqli_error($conn));	    	
+			die ('Error: '. mysqli_error($conn)); 	
 		}
 	}
 }
+
+
+function getReceiverInfo($receiverid) {
+$conn = getdbConnection();
+
+$receiverid = mysqli_real_escape_string($conn,$receiverid);
+
+/* check connection */
+if (mysqli_connect_errno()) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+}
+
+$SQL_SELECT_GETRECEIVERINFO = "SELECT fname, lname, email, telephone, address1, 
+						  address2, district, zone FROM receiver WHERE receiver_id='$receiverid'";
+
+	if ( $conn !== null ) {
+		$result = mysqli_query($conn,$SQL_SELECT_GETRECEIVERINFO);
+
+		if ($result !== false ){
+			$row=mysqli_fetch_array($result,MYSQLI_BOTH);
+			return $row;
+		} else {
+			die ('Error: '. mysqli_error($conn)); 	
+		}
+	}
+}
+
 
 
 
