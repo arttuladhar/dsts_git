@@ -37,10 +37,10 @@
   		echo "Failed to connect to MySQL: " . mysqli_connect_error();
   		exit();
 	}
-	$uname = mysqli_real_escape_string($conn,$_POST["uname"]);
-	$fname = mysqli_real_escape_string($conn,$_POST["fname"]);
-	$lname = mysqli_real_escape_string($conn,$_POST["lname"]);
-	$email = mysqli_real_escape_string($conn,$_POST["email"]);
+	$uname     = mysqli_real_escape_string($conn,$_POST["uname"]);
+	$fname     = mysqli_real_escape_string($conn,$_POST["fname"]);
+	$lname     = mysqli_real_escape_string($conn,$_POST["lname"]);
+	$email     = mysqli_real_escape_string($conn,$_POST["email"]);
 	$telephone = mysqli_real_escape_string($conn,$_POST["telephone"]);
 	$pass      = mysqli_real_escape_string($conn,$_POST["pass"]);
 	$streetAdd = mysqli_real_escape_string($conn,$_POST["streetadd"]);

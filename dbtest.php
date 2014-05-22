@@ -14,6 +14,16 @@ $shipment_id = getRowCount_UserShipment($conn);
 echo $receiver_id+1;
 echo $shipment_id+1;
 
+$districts = getDistricts();
+
+foreach ($districts as $district) {
+	echo $district;
+}
+
+$branches = getBranchNames();
+foreach ($branches as $branch) {
+	echo $branch;
+}
 
 ?>
 </body>
