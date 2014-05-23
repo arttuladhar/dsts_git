@@ -22,20 +22,10 @@
 
 include '../dbconnect.php';
 
-#Confirmation Request
-if ( (strtoupper($_SERVER['REQUEST_METHOD']) == 'POST' ) )
-{
-	if ( $_POST["confirmation"] == "true" ) {
-		//Final Confirmation
-		echo "<h1>Shipment has been registered </h1>";
-		echo "Email Sent to Sender and Receiver of the item";
-		return;
-	} else {
-		header("location: admin/registerShipment.php");
-	}
-	
-}
-
+//Get Shipment Information
+$shipmentInfoArray = Array();
+$sender_username   = Array();
+$receiver_id       = Array();
 
 #Check Database Details on Shipment
 if (isset($_GET["confirmation"])) {
@@ -45,11 +35,8 @@ if (isset($_GET["confirmation"])) {
 
 	//Get Shipment Information
 	$MYSQL_SELECT_SHIPMENT_INFO = "SELECT us.shipmentid, us.confirmation_num, us.tracking_num, us.sender_username,".
-	 " us.receiver_id, us.type, us.weight, us.cost FROM user_shipment AS us WHERE us.confirmation_num ='$confirmation'";
+	 " us.receiver_id, us.type, us.weight, us.cost FROM user_shipment AS us WHERE us.is_confirmed='0' AND us.confirmation_num ='$confirmation'";
 
-
-	//Get Shipment Information
-	$shipmentInfoArray       = Array();
 
 	if ( $dbconn !== null ) {
 		
@@ -118,11 +105,15 @@ if (isset($_GET["confirmation"])) {
 			echo "</div>";
 			echo "</div>";
 
-			echo "<form class='form-horizontal' role='form' name='confirmShipment' action='registerShipment.php' method='post'>";
+			echo "<form class='form-horizontal' role='form' name='confirmShipment' action='confirmShipment.php' method='post'>";
 			echo "<div class='form-group'>";
 			echo "<input type='submit' value='Confirm Shipment'>";
 			echo "</div>";
 			echo "<input type='hidden' name='confirmation' value='true'>";
+			echo "<input type='hidden' name='sender_email' value='{$senderInfoArray['email']}'>";
+			echo "<input type='hidden' name='receiver_email' value='{$receiverInfoArray['email']}'>";
+			echo "<input type='hidden' name='shipmentid' value='{$shipmentInfoArray['shipmentid']}'>";
+			echo "<input type='hidden' name='tracking_num' value='{$shipmentInfoArray['tracking_num']}'>";
 			echo "</form>";
 
 			
