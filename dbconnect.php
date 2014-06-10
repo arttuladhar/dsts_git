@@ -58,7 +58,23 @@ function checkuserpassword($conn, $username, $password) {
 	}
 }
 
+function checkbranchpassword($conn, $username, $password) {
+	if (mysqli_connect_errno()) {
+	    printf("Connect failed: %s\n", mysqli_connect_error());
+	    exit();
+	}
 
+	$SQL_SELECT_CHECKUSERPASSWORD = "SELECT branchid, name, password FROM branch WHERE name='$username' AND password='$password'";
+
+	if ( $conn !== null ) {
+		if ($result = mysqli_query($conn,$SQL_SELECT_CHECKUSERPASSWORD)){
+			return $result;
+		} else {
+			die ('Error: '. mysqli_error($conn));	    	
+		}
+	}
+	return -1;
+}
 
 function getUserInfo($username) {
 $conn = getdbConnection();
@@ -216,6 +232,29 @@ $SQL_SELECT_BRANCH_NAMES = "SELECT name FROM branch";;
 	}
 
 }
+
+function getBranchIDNames(){
+/* Returns String Array of Branch Names */
+
+$conn = getdbConnection();
+$SQL_SELECT_BRANCH_NAMES = "SELECT branchid, name FROM branch";;
+
+	if ( $conn !== null ) {
+		$result = mysqli_query($conn,$SQL_SELECT_BRANCH_NAMES);
+		$storeArray = Array();
+
+		if ($result !== false ){
+			while ($row=mysqli_fetch_array($result,MYSQLI_BOTH)){
+				$storeArray[] = array ($row['branchid'], $row['name']);
+			}
+		} else {
+			die ('Error: '. mysqli_error($conn));	    	
+		}
+	return $storeArray;
+	}
+
+}
+
 
 
 ?>

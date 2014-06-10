@@ -4,7 +4,24 @@
 	<script src="../js/jquery.js"></script>
 </head>
 <body>
+<?php
+//Authentication
+session_start();
+$bname=$_SESSION['bname'];
+$bid=$_SESSION['bid'];
+
+if (isset($bname) && isset($bid)) {
+	include("adminHeader.php");
+} else {
+	header("location: welcome_admin.php");
+}
+?>
+
 <div class="container">
+	<div class="row">
+		<h2>Register Shipment</h2>
+		<hr>
+	</div>
 <div class="row">
 	<div class="col-md-6">
 		<form class="form-horizontal" role="form" name="registerShipment" action="registerShipment.php" method="get">

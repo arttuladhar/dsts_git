@@ -21,11 +21,13 @@ foreach ($districts as $district) {
 	echo $district;
 }
 
+echo "<hr>";
 $branches = getBranchNames();
 foreach ($branches as $branch) {
 	echo $branch;
 }
 
+echo "<hr>";
 $row1    = getUserInfo("arttuladhar");
 $row2    = getReceiverInfo("1");
 

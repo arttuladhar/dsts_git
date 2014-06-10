@@ -5,8 +5,52 @@
 	<script src="../js/jquery.js"></script>
 </head>
 <body>
+
+
 <?php
+
 include '../dbconnect.php';
+
+if (isset($bname) && isset($bid)) {
+	session_start();
+	$bname=$_SESSION['bname'];
+	$bid=$_SESSION['bid'];
+	header("location: welcome_admin.php");
+}
+
+
+
+if (strtoupper($_SERVER['REQUEST_METHOD']) == 'POST') {
+
+$bname = $_POST["bname"];
+$bpass  = $_POST["bpassword"];
+$dbconn = getdbConnection();
+
+// Checking Connection
+if (mysqli_connect_errno()) {
+	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	exit();
+}
+
+$result = checkbranchpassword ($dbconn, $bname, $bpass);
+$result_count = $result -> num_rows;
+$result_array = mysqli_fetch_array($result,MYSQLI_ASSOC);
+$branchid = $result_array['branchid'];
+echo $result_count;
+
+if ( $result_count != 0 ) {
+	//Get BrranchName and BranchID and Attach to the Session
+	session_start();
+	$_SESSION['bname']=$bname;
+	$_SESSION['bid']= $branchid;
+
+	header("location: welcome_admin.php");
+}
+else {
+	echo "<div class='alert alert-danger'>Incorrect Username and Password</div>";
+}	
+
+}
 
 ?>
 
@@ -15,10 +59,10 @@ include '../dbconnect.php';
 <div class="row">
 <div class="col-md-8">
 <h2>Branch Login</h2><hr>
-<form class="form-horizontal" id="branchadd" role="form" action="addBranch.php" method="post">
+<form class="form-horizontal" id="branchlogin" role="form" action="login.php" method="post">
 <div class="well">
 	<div class="form-group">
-		<label for="bzone" class="col-md-2 control-label">Branch Name</label>
+		<label for="bname" class="col-md-2 control-label">Branch Name</label>
 		<div class="col-md-6">
 			<select id="bname" name="bname" class="form-control">
 				<?php

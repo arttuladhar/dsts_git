@@ -63,7 +63,6 @@ if (mysqli_connect_errno()) {
 	    exit();
 	}
 
-/*
 if ( $conn !== null ) {
 	//Insert Receiver Info
 	if (!mysqli_query($conn,$SQL_INSERT_RECEIVER)){
@@ -87,7 +86,6 @@ if ( $conn !== null ) {
 	unset($_SESSION['rdistrict']);
 	unset($_SESSION['rzone']);
 }
-*/
 
 ?>
 <body>
