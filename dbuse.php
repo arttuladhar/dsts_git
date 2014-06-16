@@ -1,5 +1,11 @@
 <?php
 
+/*
+Testing Page for Database Connections
+Prints Hostname, Username, Password and Database Schema Name
+*/
+
+
 include 'dbconnect.php';
 $dbconn = getdbConnection();
 
@@ -31,8 +37,5 @@ if ( $dbconn != null ) {
 	}
 */
 
-
 }
-
-
 ?>

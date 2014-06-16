@@ -1,18 +1,29 @@
 <html>
-<head><title>Update UserInfo</title></head>
-<body>
-<h3>Update User Profile</h3>
+<head><title>Update UserInfo</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<script src="js/jquery.js"></script>
 <?php
-session_start();
-$user_check=$_SESSION['user'];
-$sender_fname="Aayush";
-$sender_lname="Tuladhar";
+include("header.php");
+if ( isset( $_SESSION['user'] ) ) {
+    $userid   = $_SESSION['user'];
+    $username = $_SESSION['firstname'];
+}
 
-echo "<h2>Welcome, $user_check</h2>";
-if (! isset($user_check)) {
-	header("Location: login.php");
+if (! isset($userid)) {
+  header("Location: login.php");
 }
 ?>
+</head>
+<body>
+<div class='container'>
 
+<h3>Update User Profile<br>
+<small>Coming Soon</small>
+</h3>
+
+</div>
+
+<script src="js/jquery.validate.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

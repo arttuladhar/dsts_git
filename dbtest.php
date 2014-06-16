@@ -2,7 +2,9 @@
 <head><title>DB Test</title>
 </head>
 <body>
-<h2>Testing Page for Database Repositories</h2>
+<h2>Testing Page for Database Repositories<br>
+	<small>No Actual use in Production</small>
+</h2>
 
 <?php
 include 'dbconnect.php';
@@ -33,8 +35,6 @@ $row2    = getReceiverInfo("1");
 
 echo $row1['firstname'];
 echo $row2['fname'];
-
-
 
 ?>
 </body>

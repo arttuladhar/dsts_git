@@ -45,6 +45,8 @@ $shipmentid  = getRowCount_UserShipment($conn) + 1;
 $confirmation_num = rand(0,999999);		//6 Digit
 $tracking_num     = rand(0,99999999);	//8 Digit
 $sender_username  = $userid;
+
+
 $type             = $_POST['mail'];
 $weight           = $_POST['weight'];
 $cost             = $_POST['cost'];
@@ -68,7 +70,7 @@ if (mysqli_connect_errno()) {
 	}
 
 if ( $conn !== null ) {
-	
+
 	//Insert Receiver Info
 	if (!mysqli_query($conn,$SQL_INSERT_RECEIVER)){
 		die ('Error: '. mysqli_error($conn));	    	
@@ -77,7 +79,7 @@ if ( $conn !== null ) {
 	//Insert Shipment Info
 	if (!mysqli_query($conn,$SQL_INSERT_USER_SHIPMENT)){
 		die ('Error: '. mysqli_error($conn));	    	
-	}	
+	}
 
 	mysqli_close($conn);
 

@@ -4,12 +4,6 @@
 </head>
 <body>
 <?php
-
-
-
-?>
-
-<?php
 	#Confirmation Request
 	if ( (strtoupper($_SERVER['REQUEST_METHOD']) == 'POST' ) )
 	{
@@ -57,10 +51,6 @@
 	$tracking_num = $_POST["tracking_num"];
 	$sender_email = $_POST["sender_email"];
 	$receiver_email = $_POST["receiver_email"];
-
-	echo $tracking_num;
-	echo $sender_email;
-	echo $receiver_email;
 
 	/*
 	//Sending Email

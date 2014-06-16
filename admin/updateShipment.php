@@ -164,6 +164,14 @@ if ( (strtoupper($_SERVER['REQUEST_METHOD']) == 'POST' ) ) {
 	if (!mysqli_query($conn,$INSERT_SHIPMENT_STATUS)) {
 		die ('Error: '. mysqli_error($conn));	    	
 	} else {
+		//Business Logic for Delivered
+		if ($status == "DELIVERED") {
+			//Update Shipment Info to Delivered
+
+			$UPDATE_SHIPMENT_INFO = "UPDATE user_shipment SET is_delivered='1' WHERE shipmentid = '$sid'";
+			mysqli_query($conn,$UPDATE_SHIPMENT_INFO);
+
+		}
 		echo "<h3>Shipment Status Updated</h3>";
 	}
 

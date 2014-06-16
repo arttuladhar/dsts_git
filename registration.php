@@ -100,8 +100,6 @@
     <div class="col-md-6">
 
       <img src="img/nepal_postal.png" class="img-responsive" alt="Postal Service">
-
-
       <p>
         <blockquote>DSTS - First System in Nepal to provide Complete Solutions to Domestic Tracking System
           <br><br><i>- General Post Office</i>

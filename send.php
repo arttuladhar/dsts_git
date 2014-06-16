@@ -27,7 +27,6 @@ if (! isset($userid)) {
 $user_check = $username;
 
 //For New Session Delete Existing Session Cookies
-
 if (isset($_GET['session'])) {
 	if ( $_GET['session']=="new" ) {
 
@@ -67,10 +66,7 @@ $_SESSION['szone']      = $szone     = $row['zone'];
 
 <body>
 	<div class="container">
-		<!-- Header -->
-		
-		<!-- Header End -->
-		<div class="page-header">
+	<div class="page-header">
   <h1>Send Package<br></h1>
 </div>
 
@@ -99,7 +95,7 @@ $_SESSION['szone']      = $szone     = $row['zone'];
 				</div>
 				<div class="form-group">
 					<label for="rtelephone">Telephone * </label>
-					<input type="number" id="rtelephone" name="rtelephone" class="form-control" value="<?= $rtelephone ?>" placeholder="Eg. 014250269" required>
+					<input type="number" id="rtelephone" name="rtelephone" class="form-control input-number–noSpinners" value="<?= $rtelephone ?>" placeholder="Eg. 014250269" required>
 				</div>
 				<div class="form-group">
 					<label for="remail">Email (optional)</label>
