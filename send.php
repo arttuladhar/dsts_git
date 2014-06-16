@@ -1,27 +1,43 @@
 <html>
 <head>
 	<title>DSTS - Send Shipment</title>
-	<!-- Bootstrap -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<script src="js/jquery.js"></script>
+		<style>
+		input[type=number].input-number–noSpinners { -moz-appearance: textfield; }
+		input[type=number].input-number–noSpinners::-webkit-inner-spin-button,
+		input[type=number].input-number–noSpinners::-webkit-outer-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+	</style>
 </head>
 <?php
+include("header.php");
 
-session_start();
-$user_check=$_SESSION['user'];
+if ( isset( $_SESSION['user'] ) ) {
+    $userid   = $_SESSION['user'];
+    $username = $_SESSION['firstname'];
+}
 
-if (! isset($user_check)) {
+if (! isset($userid)) {
 	header("Location: login.php");
 }
 
+$user_check = $username;
+
 //For New Session Delete Existing Session Cookies
-if ( $_GET['session']=="new" ) {
+
+if (isset($_GET['session'])) {
+	if ( $_GET['session']=="new" ) {
+
 	unset($_SESSION['rfname']);
 	unset($_SESSION['rlname']);
 	unset($_SESSION['rtelephone']);
 	unset($_SESSION['remail']);
 	unset($_SESSION['radd1']);
 	unset($_SESSION['radd2']);
+}
 }
 
 //Loading Session Vars [If Any]
@@ -32,11 +48,9 @@ $remail     = isset($_SESSION['remail'])?$_SESSION['remail']:'';
 $radd1 = isset($_SESSION['radd1'])?$_SESSION['radd1']:'';
 $radd2  = isset($_SESSION['radd2'])?$_SESSION['radd2']:'';
 
-//Get UserInfo from Database
 include 'dbconnect.php';
-
+$user_check = $userid;
 $row    = getUserInfo($user_check);
-
 
 //Storing Sender Information to Session
 $_SESSION['sfname']     = $sfname    = $row['firstname'];
@@ -48,20 +62,21 @@ $_SESSION['sadd2']      = $add2      = $row['block_address'];
 $_SESSION['sdistrict']  = $sdistrict = $row['district'];
 $_SESSION['szone']      = $szone     = $row['zone'];
 
+
 ?>
 
 <body>
 	<div class="container">
 		<!-- Header -->
-		<?php include("header.html"); ?>
+		
 		<!-- Header End -->
 		<div class="page-header">
-  <h1>Send Package<br><small>Welcome, <?= $user_check ?> </small></h1>
+  <h1>Send Package<br></h1>
 </div>
 
 	<div class="row">
 		<ol class="breadcrumb">
-  			<li class="active">Step1: Informations</li>
+  			<li class="active"><b>Step1: Informations</b></li>
   			<li>Step2: Payment</a></li>
   			<li>Step3: Confirmation</li>
 		</ol>
@@ -75,20 +90,20 @@ $_SESSION['szone']      = $szone     = $row['zone'];
 			<form role="form" id="sendmail" action="payment.php" method="post">
 				<div class="form-group">
 					<label for"rfname">First Name*</label>
-					<input type="text" id="rfname" name="rfname" class="form-control" value="<?= $rfname ?>">
+					<input type="text" id="rfname" name="rfname" class="form-control" value="<?= $rfname ?>" required>
 				</div>
 
 				<div class="form-group">
 					<label for="rlname">Last Name*</label>
-					<input type="text" id="rlname" name="rlname" class="form-control" value="<?= $rlname ?>">
+					<input type="text" id="rlname" name="rlname" class="form-control" value="<?= $rlname ?>" required>
 				</div>
 				<div class="form-group">
-					<label for="rtelephone">Telephone*</label>
-					<input type="text" id="rtelephone" name="rtelephone" class="form-control" value="<?= $rtelephone ?>" placeholder="Eg. 014250269">
+					<label for="rtelephone">Telephone * </label>
+					<input type="number" id="rtelephone" name="rtelephone" class="form-control" value="<?= $rtelephone ?>" placeholder="Eg. 014250269" required>
 				</div>
 				<div class="form-group">
 					<label for="remail">Email (optional)</label>
-					<input type="text" id="remail" name="remail" class="form-control" value="<?= $remail ?>">
+					<input type="email" id="remail" name="remail" class="form-control" value="<?= $remail ?>">
 				</div>
 			</div> <!-- Col1 End -->
 
@@ -96,7 +111,7 @@ $_SESSION['szone']      = $szone     = $row['zone'];
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for"uname">Address 1*</label>
-					<input type="text" id="radd1" name="radd1" class="form-control" value="<?= $radd1 ?>" placeholder="Eg. 294 Chhitadharmarg">
+					<input type="text" id="radd1" name="radd1" class="form-control" value="<?= $radd1 ?>" placeholder="Eg. 294 Chhitadharmarg" reqiored>
 				</div>
 
 				<div class="form-group">
@@ -107,21 +122,29 @@ $_SESSION['szone']      = $szone     = $row['zone'];
 				<div class="form-group">
 					<label for="rdistrict">District</label>
 					<select id="rdistrict" name="rdistrict" class="form-control">
-						<option>Bagmati</option>
-						<option>Two</option>
+		            <?php
+		            $districts = getDistricts();
+		            foreach ($districts as $district) {
+		              echo "<option>$district</option>";
+		            }
+		            ?>					
 					</select>
 				</div>
 
 				<div class="form-group">
 					<label for="rzone">Zone</label>
 					<select id="rzone" name="rzone" class="form-control">
-						<option>Bagmati</option>
-						<option>Two</option>
+            		<?php
+            		$zones = getZones();
+            		foreach ($zones as $zone) {
+            		  echo "<option>$zone</option>";
+            		  }
+            		?>
 					</select>
 				</div>
 			</div>
 	</div> <!-- Col2 End -->
-	 <label><input type="checkbox"> Save to Addressbook ( Coming Soon )</label>
+	 <label><input type="checkbox"> Save to Addressbook </label>
 <hr>
 <!-- Sender Information -->
 <div class="row">
@@ -167,17 +190,21 @@ $_SESSION['szone']      = $szone     = $row['zone'];
 				</label>
 			</div>
 			<div class="form-group">
+				<div class="col-md-6">
 				<label for="weight">Weight (gram) *</label>
-				<input type="text" id="weight" name="weight" class="form-control">
+				
+				<input type="number" class="form-control input-number–noSpinners" id="weight" name="weight" class="form-control" required>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <input type="hidden" name="step1" value="complete">
-</form>
+
 <ul class="pager">
-  <li><a href="#" onclick="document.forms[0].submit();return false;">Next</a></li>
+  <li><button type="submit" class="btn btn-primary">Next</button></li>
 </ul>
+</form>
 
 </div> <!-- Container End -->
 <hr>

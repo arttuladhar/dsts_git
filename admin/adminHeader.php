@@ -26,7 +26,9 @@ $bid=$_SESSION['bid'];
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="registerShipment.php">Register Shipment</a></li>
-        <li><a href="updateShipment.php">Update Shipment</b></a>
+        <li><a href="updateShipment.php">Update Shipment</a></li>
+        <li><a href="logout.php">Logout</a></li>
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

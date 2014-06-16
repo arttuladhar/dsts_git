@@ -46,12 +46,13 @@ function checkuserpassword($conn, $username, $password) {
 	    exit();
 	}
 
-	$SQL_SELECT_CHECKUSERPASSWORD = "SELECT username, password FROM user_info WHERE username='$username' AND password='$password'";
+	$SQL_SELECT_CHECKUSERPASSWORD = "SELECT username, password, firstname FROM user_info WHERE username='$username' AND password='$password'";
 
 	if ( $conn !== null ) {
 
 		if ($result = mysqli_query($conn,$SQL_SELECT_CHECKUSERPASSWORD)){
-			return $result;
+			$resultArray=mysqli_fetch_array($result,MYSQLI_BOTH);
+			return $resultArray;
 		} else {
 			die ('Error: '. mysqli_error($conn));	    	
 		}

@@ -5,26 +5,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DSTS - User Registration</title>
-
-  <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
-
-      <!-- jQuery -->
   <script src="js/jquery.js"></script>
  </head>
  
 <body>
   <div class="container">
     <div class="row">
-      <?php include 'header.html' ?>
-      
+      <?php 
+      include 'header.php';
+      include 'dbconnect.php';
+      ?>
+
     </div>
     <h2>User Registration</h2>
     <hr>
@@ -33,23 +25,23 @@
     <div class="col-md-5">
       <form role="form" id="registrationform" action="register.php" method="post">
         <div class="form-group">
-          <label for"uname">Username</label>
+          <label for"uname">Username*</label>
           <input type="text" id="uname" name="uname" class="form-control" placeholder="Enter Username">
         </div>
 
         <div class="form-group">
-          <label for="fname">First Name</label>
+          <label for="fname">First Name*</label>
           <input type="text" id="fname" name="fname" class="form-control" placeholder="Enter FirstName">
         </div>
 
         <div class="form-group">
-          <label for="lname">Last Name</label>
+          <label for="lname">Last Name*</label>
           <input type="text" id="lname" name="lname" class="form-control" placeholder="Enter LastName">
         </div>
 
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="text" id="email" name="email" class="form-control" placeholder="Enter Email">
+          <label for="email">Email*</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email">
         </div>
 
         <div class="form-group">
@@ -64,7 +56,7 @@
 
 
         <div class="form-group">
-          <label for="streetadd">Addess 1</label>
+          <label for="streetadd">Addess 1*</label>
           <input type="text" id="streetadd" name="streetadd" class="form-control" placeholder="Eg. 294 Chittadhar Marg">
         </div>
 
@@ -74,24 +66,34 @@
         </div>
 
         <div class="form-group">
-          <label for="district">District</label>
+          <label for="district">District*</label>
           <select id="district" name="district" class="form-control">
-            <option>Bagmati</option>
-            <option>Two</option>
+            <?php
+            $districts = getDistricts();
+            foreach ($districts as $district) {
+              echo "<option>$district</option>";
+            }
+            ?>
           </select>
         </div>
 
         <div class="form-group">
-          <label for="zone">Zone</label>
+          <label for="zone">Zone*</label>
           <select id="zone" name="zone" class="form-control">
-            <option>Bagmati</option>
-            <option>Two</option>
+            <?php
+            $zones = getZones();
+            foreach ($zones as $zone) {
+              echo "<option>$zone</option>";
+              }
+            ?>
           </select>
         </div>
         <br>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <p>* Required Fields</p>
       </form>
     </div>
+
 
     <div class="col-md-1">  </div>
 
@@ -156,10 +158,10 @@ $("#registrationform").validate({
     },
     streetadd:{
       required: true,
-      maxlength: 20
+      maxlength: 30
     },
     blockadd:{
-      maxlength: 20
+      maxlength: 30
     }
   }
 });

@@ -22,7 +22,7 @@
 </head>
 <body>
 	<!-- Header Page -->
-
+	<?= include 'header.php'; ?>
 
 	<!-- End Header -->
 <div class="container">
@@ -56,7 +56,7 @@
 
 	if ( $conn !== null ) {
 		    //Checking if the fields are non empty.
-		    if ( $uname !== '' && $fname !== '' && $lname !== '' && $email !== '' && $telephone !== '' && $pass !== '' && $streetAdd !== '' && $district !== '' && $zone !== '' ) {
+		    if ( $uname !== '' && $fname !== '' && $lname !== '' && $email !== '' && $pass !== '' && $streetAdd !== '' && $district !== '' && $zone !== '' ) {
 
 				//Start Database Transaction
 		    	if (!mysqli_query($conn,$SQL_INSERT_USERINFO)){
@@ -78,7 +78,7 @@
 				}
 		    	//End Database Transaction
 		    } else {
-		    	echo "<h2>Error : All Fields are Required. Please Resubmit the form</h2><hr>";
+		    	echo "<h2>Error : All Required fields must be filled. Please Resubmit the form</h2><hr>";
 		    	echo "<a href=\"javascript:history.go(-1)\">GO BACK</a><br>";
 		    }
 		}

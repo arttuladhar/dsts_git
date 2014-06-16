@@ -16,11 +16,14 @@
     exit();
 	}
 
-session_start();
-$user_check=$_SESSION['user'];
-$user_step1=$_POST['step1'];
+include("header.php");
 
-if (! isset($user_check)) {
+if ( isset( $_SESSION['user'] ) ) {
+    $userid   = $_SESSION['user'];
+    $username = $_SESSION['firstname'];
+}
+
+if (! isset($userid)) {
 	header("Location: login.php");
 }
 
@@ -92,15 +95,14 @@ else if ($type == "parcel"){
 
 <body>
 <div class="container">
-	<?php include("header.html"); ?>
 	<div class="page-header">
-			<h1>Send Package<br><small>Welcome, <?= $user_check ?> </small></h1>
+			<h1>Send Package<br></h1>
 	</div>
 
 	<div class="row">
 		<ol class="breadcrumb">
   			<li><a href="send.php?session=active">Step1: Informations</a></li>
-  			<li class="active">Step2: Payment</li>
+  			<li class="active"><b>Step2: Payment</b></li>
   			<li>Step3: Confirmation</li>
 		</ol>
 
@@ -162,21 +164,24 @@ else if ($type == "parcel"){
 			</div>
 	</div>
 	</div>
-
 	<input type="hidden" name="mail" value="<?= $type ?>">
 	<input type="hidden" name="weight" value="<?= $weight ?>">
 	<input type="hidden" name="cost" value="<?= $price ?>">
-
-	</form>
+	
 		<div class="row">
 		<div class="col-md-8">
 		<ul class="pager">
-			<li><a href="send.php?session=active">Previous</a></li>
-  			<li><a href="#" onclick="document.forms[0].submit();return false;">Proceed With Send Package</a></li>
+			<li>				
+				<a href='send.php?session=active'><input type='button' class='btn btn-primary' value='Previous'></a>
+			</li>
+			<li>
+				<input type='submit' class='btn btn-primary' value="Send Package">
+			</li>
 		</ul>
 		</div>
 	</div>
 </div>
+</form>
 <script src="js/additional-methods.js"></script>
 <script src="js/bootstrap.min.js"></script>
 </body>

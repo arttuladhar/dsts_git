@@ -6,21 +6,25 @@
 </head>
 <?php
 
+	include("header.php");
+
 	//Checking if the request is forwarded by POST
 	if (strtoupper($_SERVER['REQUEST_METHOD']) != 'POST') {
 	header("HTTP/1.0 404 Not Found");
 	echo "<div class='container'><h1>404 Unpriviledge Acces</h1>";
-    echo "The page that you have requested could not be found.<br><hr>";
-    echo "<a href='index.html''>Home</a><br>";
+    echo "Page has expired. Please Resubmit the Form<br><hr>";
+    echo "<a href='index.php''>Home</a><br>";
     echo "<a href='login.php'>Login</a></div>";
     exit();
 	}
 
 
-session_start();
-$user_check=$_SESSION['user'];
+if ( isset( $_SESSION['user'] ) ) {
+    $userid   = $_SESSION['user'];
+    $username = $_SESSION['firstname'];
+}
 
-if (! isset($user_check)) {
+if (! isset($userid)) {
 	header("Location: login.php");
 }
 
@@ -40,7 +44,7 @@ $receiver_id = getRowCount_Receiver($conn) + 1;
 $shipmentid  = getRowCount_UserShipment($conn) + 1;
 $confirmation_num = rand(0,999999);		//6 Digit
 $tracking_num     = rand(0,99999999);	//8 Digit
-$sender_username  = $user_check;
+$sender_username  = $userid;
 $type             = $_POST['mail'];
 $weight           = $_POST['weight'];
 $cost             = $_POST['cost'];
@@ -64,6 +68,7 @@ if (mysqli_connect_errno()) {
 	}
 
 if ( $conn !== null ) {
+	
 	//Insert Receiver Info
 	if (!mysqli_query($conn,$SQL_INSERT_RECEIVER)){
 		die ('Error: '. mysqli_error($conn));	    	
@@ -90,7 +95,7 @@ if ( $conn !== null ) {
 ?>
 <body>
 	<div class="container">
-		<?php include("header.html"); ?>
+		<?php include("header.php"); ?>
 		<div class="page-header">
 			<h1>Send Package<br><small>Confirmation</small></h1>
 		</div>
@@ -99,7 +104,7 @@ if ( $conn !== null ) {
 			<ol class="breadcrumb">
 				<li>Step1: Informations</li>
 				<li>Step2: Payment</a></li>
-				<li class="active">Step3: Confirmation</li>
+				<li class="active"><b>Step3: Confirmation</b></li>
 			</ol>
 		</div>
 
@@ -128,23 +133,5 @@ if ( $conn !== null ) {
 		<h4>
 
 		</div>
-
-<?= $rfname ?><br>
-<?= $rlname ?><br>
-<?= $rtelephone ?><br>
-<?= $remail ?><br>
-<?= $radd1 ?><br>
-<?= $radd2 ?><br>
-<?= $rdistrict ?><br>
-<?= $rzone ?><br>
-<?= $receiver_id ?><br>
-<?= $shipmentid ?><br>
-<?= $confirmation_num ?><br>
-<?= $tracking_num ?><br>
-<?= $sender_username ?><br>
-<?= $type ?><br>
-<?= $weight ?><br>
-<?= $cost ?><br>
-
 </body>
 </html>

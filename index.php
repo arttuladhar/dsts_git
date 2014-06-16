@@ -40,11 +40,8 @@
     <body>
 
     <!-- Header Start -->
-    <script> 
-    $(document).ready(function(){
-    $("#header").load("header.html"); 
-    });
-    </script>
+    <?php include("header.php"); ?>
+
     <!-- Header End --> 
 
     <div id="header"></div>

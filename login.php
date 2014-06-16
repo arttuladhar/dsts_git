@@ -5,46 +5,16 @@
 	<script src="js/jquery.js"></script>
 </head>
 <body>
-<div id="header"></div>
-<div class="container">
-<!-- Header -->
-<?php include("header.html"); ?>
-<!-- Header End -->
-
 <?php
+include("header.php");
 
-if (strtoupper($_SERVER['REQUEST_METHOD']) == 'POST') {
-include 'dbconnect.php';
-session_start();
-
-$uname = $_POST["uname"];
-$pass  = $_POST["pass"];
-$dbconn = getdbConnection();
-
-// Checking Connection
-if (mysqli_connect_errno()) {
-	echo "Failed to connect to MySQL: " . mysqli_connect_error();
-	exit();
-}
-
-$result = checkuserpassword ($dbconn, $uname, $pass);
-$result_count = $result -> num_rows;
-
-if ( $result) {
-	if ( $result_count != 0 ) {
-		$_SESSION['user']=$uname;
-		header("location: welcome.php");
-	}
-	else {
-		echo "<div class='alert alert-danger'>Incorrect Username and Password</div>";
-	}	
-} else {
-	echo "<div class='alert alert-danger'>Unknown Problem - If this issue still persists please contact us</div>";
-}
+if(isset($_SESSION)) {
+session_destroy();
 }
 
 ?>
 
+<div class="container">
 	<div class="row">
 		<div class="col-md-3"></div>
 
@@ -82,9 +52,38 @@ if ( $result) {
 				</form>
 			</div>
 		</div>
+
+
+<?php
+
+if (strtoupper($_SERVER['REQUEST_METHOD']) == 'POST') {
+	include 'dbconnect.php';
+	session_start();
+
+	$uname = $_POST["uname"];
+	$pass  = $_POST["pass"];
+	$dbconn = getdbConnection();
+
+	$result = checkuserpassword ($dbconn, $uname, $pass);
+	
+	if ( ! empty($result) ) {
+		$dbpass   = $result['password'];
+		$username = $result['firstname'];
+
+		//Check if Correct Password
+		if ( $dbpass === $pass) {
+			$_SESSION['user']      = $uname;
+			$_SESSION['firstname'] = $username;
+			header("location: welcome.php");
+		}
+	}
+		else {echo "<div class='row' align='center'><div class='col-md-6 col-md-offset-3'><div class='alert alert-danger'>Incorrect Username and Password</div></div></div>";
+	}
+}
+
+?>
 	</div>
 </div>
-
 <!-- jQuery Validation -->
 <script src="js/jquery.validate.js"></script>
 <script src="js/bootstrap.min.js"></script>
