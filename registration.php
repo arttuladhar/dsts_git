@@ -101,26 +101,25 @@
 
       <img src="img/nepal_postal.png" class="img-responsive" alt="Postal Service">
       <p>
-        <blockquote>DSTS - First System in Nepal to provide Complete Solutions to Domestic Tracking System
-          <br><br><i>- General Post Office</i>
+        <blockquote class="bg-info">DSTS - First System in Nepal to provide Complete Solutions to Domestic Tracking System
+          <br><br>
         </blockquote>
       </p>
       <hr>
+      <div class='bg-info'>
       <h4>New to DSTS.com?</h4>
       <p>Create a DSTS.com Account to...</p>
       <ul>
-        <li>Feature 1</li>
-        <li>Feature 2</li>
+        <li>Create Shipments</li>
+        <li>Track Shipments</li>
+        <li>View Shipments</li>
       <ul>
+      </div>
 
     </div>
 
     <!-- Container -->
   </div>
-
-  <!-- Footer Page Begin -->
-
-  <!-- Footer Page End -->
 
 <script>
 $(document).ready(function(){

@@ -8,7 +8,6 @@
 
   <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
-
       <script src="js/jquery.js"></script>
 
       <style type="text/css">
@@ -26,6 +25,26 @@
         width: 120px;
         margin-bottom: 20px;   
       }
+      html, body {
+  height: 100%;
+}
+
+#wrap {
+  min-height: 100%;
+}
+
+#main {
+  overflow:auto;
+  padding-bottom:150px; /* this needs to be bigger than footer height*/
+}
+
+.footer {
+  position: relative;
+  margin-top: -150px; /* negative value of footer height */
+  height: 150px;
+  clear:both;
+  padding-top:20px;
+}
       </style>
 
     <?php include("header.php"); ?>
@@ -35,26 +54,35 @@
 
     <div id="header"></div>
     <div class="container">
-      <div class="row">
+      
         <div class="jumbotron">
-          <h2>Domestic Shipment Tracking System</h2>
-
-          <italics>Complete Solution for Domestic Shipment Tracking</italics>
-          <br><a class="btn btn-primary btn-med" role="button">Learn more</a>
-        </div>
+          <h2>Domestic Shipment Tracking System<br>
+            <small>
+              <i>Complete Solution for Domestic Shipment Tracking</i>
+            </small>
+          </h2>
       </div>
-
-      <!--  Carousel -->
       <div class="col-md-6">
-        <h3>Features</h3>
+        <p class='lead'>
+          Domestic Shipment Tracking System (DSTS) is an end to end tracking solution for all shipments
+          and letter mails for an organization.
+        </p>
+          <hr>
+        <h3>User Features</h3>
         <ul>
-         <li>Tracking</li>
-         <li>Supreme</li>
-         <li>Tacos</li>
+         <li>User Registration</li>
+         <li>Track Shipment</li>
+         <li>Past Shipments</li>
+         <li>Pay at Site</li>
+         <li>E-Pay</li>
        </ul>
-       <h3>Things to To</h3>
+        <hr>
+       <h3>Branch Features</h3>
        <ul>
-        <li>Make All Images Same Size</li>
+        <li>Add New Branches</li>
+        <li>Branch Login</li>
+        <li>Register Shipments</li>
+        <li>Update Shipments</li>
       </ul>
      </div>
      <div class="col-md-6 bg-info">
@@ -85,12 +113,17 @@
   <a class="carousel-control right" href="#mycarousel" data-slide="next">&rsaquo;</a>
 </div>
 </div>
-<!-- /.carousel -->
-
-
-<!-- Inner Container -->
 </div>
-
+<br>
+<br>
+<br>
+<div class='container'>
+<div class='row'>
+<div class='col-md-4-offset-4' align='center'>
+<a href='aboutme.html'> About Me </a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; <a href='admin/index.php'>Branch Login</a>
+</div>
+</div>
+</div>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>

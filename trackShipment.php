@@ -92,14 +92,15 @@ if (isset($_GET["tracking"])) {
 			echo "<div>";
 
 			$imgLink = "http://maps.googleapis.com/maps/api/staticmap?";
-			$imgLink = $imgLink . "size=500x400&sensor=false";
+			$imgLink = $imgLink . "size=800x500&sensor=false&maptype=roadmap";
+
 			$path_lat_long = "&path=color:blue|weight:5";
 
 			$i=0;
 			$label = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J","K", "L", "M", "N", "O","P", "Q", "R", "S", "T"];
 			foreach ($branch as $key => $value) {
 				
-				echo "Post Office - $key ";
+				echo "Post Office - $key ($label[$i])";
 				echo "<br>";
 				$path_lat_long = $path_lat_long . "|$value[0],$value[1]";
 				$imgLink = $imgLink . "&markers=color:red|label:$label[$i]|$value[0],$value[1]";

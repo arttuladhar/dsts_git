@@ -49,22 +49,33 @@
 
 	mysqli_close($conn);
 	$tracking_num = $_POST["tracking_num"];
-	$sender_email = $_POST["sender_email"];
+	$sender_email   = $_POST["sender_email"];
 	$receiver_email = $_POST["receiver_email"];
 
-	/*
+
 	//Sending Email
   	if  ( !( IsNullorEmptyString ($sender_email) && IsNullorEmptyString($receiver_email)) ){
 
-    	$sender_email = $_POST["sender_email"];
-			$receiver_email = $_POST["receiver_email"];
+  	$sender_email   = $_POST["sender_email"];
+	$receiver_email = $_POST["receiver_email"];
 		
 			$from = "info@NepalDSTS.com";
 			$to = $sender_email . ', ' . $receiver_email;
 
 			$subject = "DSTS - Item Shipment Confirmation";
 
-	    	$message = '<html><body><h2>Shipment Item has been scheduled</h2>';
+			$message =  '-----------------------------------------------------------\n';
+	    	$message .= 'DSTS - Items Shipment Confirmation\n';
+	    	$message .= 'Sender   - ${sender_email} \n';
+	    	$message .= 'Receiver - ${receiver_email} \n';
+	    	$message .= 'Tracking Number - ${tracking_num} \n';
+	    	$message .= '-----------------------------------------------------------\n';
+	    	$message .= 'Thank You for using DSTS';
+
+	    	$tracking_num = $_POST["tracking_num"];
+			$sender_email = $_POST["sender_email"];
+			$receiver_email = $_POST["receiver_email"];
+
 	    	$message = wordwrap($message, 70);
 
 	    	// send mail
@@ -73,9 +84,10 @@
 			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
 	    	mail($to,$subject,$message,$headers);
-	    	echo "<h2>Email Sent to Sender and Receiver of the item</h2>";
+	    	echo "<h2>Email Sent</h2>";
+	    	echo "<h4>Message :</h4>";
+	    	echo $message;
 	  	}
-		*/
 		
 	} else {
 		header("HTTP/1.0 404 Not Found");

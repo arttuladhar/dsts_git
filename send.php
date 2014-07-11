@@ -78,14 +78,18 @@ $_SESSION['szone']      = $szone     = $row['zone'];
 		</ol>
 
 	</div>
+	<div class='row'>
+		<label class="label-warning">* Required</label>
+	</div>
 	<div class="row">
+
 		<div class="col-sm-8"><strong><h4 class="text-info">Receiver Information</h4></strong></div>
 	</div>
 	<div class="row">
 		<div class="col-md-4"> <!-- Col1 Begin -->
 			<form role="form" id="sendmail" action="payment.php" method="post">
 				<div class="form-group">
-					<label for"rfname">First Name*</label>
+					<label for="rfname">First Name*</label>
 					<input type="text" id="rfname" name="rfname" class="form-control" value="<?= $rfname ?>" required>
 				</div>
 
@@ -95,10 +99,10 @@ $_SESSION['szone']      = $szone     = $row['zone'];
 				</div>
 				<div class="form-group">
 					<label for="rtelephone">Telephone * </label>
-					<input type="number" id="rtelephone" name="rtelephone" class="form-control input-number–noSpinners" value="<?= $rtelephone ?>" placeholder="Eg. 014250269" required>
+					<input type="number" id="rtelephone" name="rtelephone" class="form-control input-number–noSpinners" value="<?= $rtelephone ?>" required>
 				</div>
 				<div class="form-group">
-					<label for="remail">Email (optional)</label>
+					<label for="remail">Email</label>
 					<input type="email" id="remail" name="remail" class="form-control" value="<?= $remail ?>">
 				</div>
 			</div> <!-- Col1 End -->
@@ -148,7 +152,7 @@ $_SESSION['szone']      = $szone     = $row['zone'];
 </div>
 <div class="row">
 		<div class="col-md-4"> <!-- Col1 Begin -->
-			<table class="table table-condensed table-bordered">
+			<table class="table table-condensed table-stripped">
 				<tr>
 					<th>First Name</th><td><?= $sfname ?></td></tr>
 					<th>Last name</th><td><?= $slname ?></td></tr>
@@ -156,7 +160,7 @@ $_SESSION['szone']      = $szone     = $row['zone'];
 					<th>Address 1 </th><td><?= $add1 ?></td></tr>
 					<th>Address 2 </th><td><?= $add2 ?></td></tr>
 					<th>District</th><td><?= $sdistrict ?></td></tr>
-					<th>Zone</th><td><?= $szone ?></td></tr>
+					<th>Zone*</th><td><?= $szone ?></td></tr>
 			</table>
 		</div>
 </div>

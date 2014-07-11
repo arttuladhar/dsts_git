@@ -88,7 +88,7 @@ if (! isset($userid)) {
         <ul>
         </h4>
         <br>
-        <center><a href="send.php?session=new"><button type="submit" class="btn btn-success">My Shipment</button></a></center>
+        <center><a href="myshipments.php"><button type="submit" class="btn btn-success">My Shipment</button></a></center>
       </div>
     </div>
   </div>

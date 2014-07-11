@@ -39,7 +39,6 @@
         } else {
           echo "<li><a href='registration.php'>Register</a></li>";
           echo "<li><a href='login.php'>User Login</a></li>";
-          echo "<li><a href='admin/index.php'>Branch Login</a></li>";
         }
 
         ?>
